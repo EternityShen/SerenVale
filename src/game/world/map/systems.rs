@@ -3,6 +3,7 @@ use bevy_ecs_ldtk::prelude::*;
 
 use super::components::*;
 
+/// 生成世界地图
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let map_handle = asset_server.load("map.ldtk");
 

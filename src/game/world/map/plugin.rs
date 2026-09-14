@@ -5,6 +5,7 @@ use super::systems;
 
 use crate::game_state;
 
+/// 世界地图插件
 pub struct MapPlugin;
 
 impl Plugin for MapPlugin {
