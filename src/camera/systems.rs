@@ -2,6 +2,7 @@ use bevy::prelude::*;
 use bevy_firefly::{data::FireflyConfig, lights::PointLight2d};
 
 use crate::camera::components::MainCamera;
+use crate::game::Player;
 
 /// 创建世界主相机
 pub fn setup(mut commands: Commands) {
@@ -67,21 +68,22 @@ pub fn setup(mut commands: Commands) {
 //     }
 // }
 
-// pub(super) fn follow_player(
-//     query_player: Query<&Transform, (With<Player>, Without<MainCamera>)>,
-//     mut query_camera: Query<&mut Transform, (With<MainCamera>, Without<Player>)>,
-// ) {
-//     let Ok(mut transform_camera) = query_camera.single_mut() else {
-//         return;
-//     };
-//
-//     let Ok(transform_player) = query_player.single() else {
-//         return;
-//     };
-//
-//     let player_x = transform_player.translation.x;
-//     let player_y = transform_player.translation.y;
-//
-//     transform_camera.translation.x = player_x;
-//     transform_camera.translation.y = player_y;
-// }
+/// 相机跟随玩家
+pub(super) fn follow_player(
+    query_player: Query<&Transform, (With<Player>, Without<MainCamera>)>,
+    mut query_camera: Query<&mut Transform, (With<MainCamera>, Without<Player>)>,
+) {
+    let Ok(mut transform_camera) = query_camera.single_mut() else {
+        return;
+    };
+
+    let Ok(transform_player) = query_player.single() else {
+        return;
+    };
+
+    let player_x = transform_player.translation.x;
+    let player_y = transform_player.translation.y;
+
+    transform_camera.translation.x = player_x;
+    transform_camera.translation.y = player_y;
+}

@@ -11,3 +11,7 @@ mod player;
 pub mod plugin;
 /// 世界
 mod world;
+
+// 为了保证各模块的可见性有序,部分需公开(模块/组件/插件/...)采用单独导出可见性
+/// 玩家组件(玩家一定会有这个组件)
+pub use player::Player;
